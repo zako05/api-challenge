@@ -1,0 +1,7 @@
+{
+  "todos":
+  [
+    {"title": "2nd JSON format", "doneStatus": true},
+    {"title": "3rd JSON format", "doneStatus": true}
+  ]
+}
