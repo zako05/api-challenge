@@ -45,6 +45,20 @@ cypress.json
 }
 ```
 
+## Run specs
+
+open test runner:
+
+```bash
+yarn run cypress
+```
+
+run tests:
+
+```
+yarn run test
+```
+
 
 
 
