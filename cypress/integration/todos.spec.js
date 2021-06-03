@@ -288,7 +288,7 @@ describe('/todo', () => {
     })
   })
 
-  it.only('POST /todos XML to JSON', () => {
+  it('POST /todos XML to JSON', () => {
     cy.readFile('http-request-method-post.xml').then((xml) => {
       cy.request({
         method: 'POST',
@@ -306,7 +306,7 @@ describe('/todo', () => {
     })
   })
 
-  it.only('POST /todos JSON to XML', () => {
+  it('POST /todos JSON to XML', () => {
     cy.readFile('http-request-method-post.json').then((json) => {
       cy.request({
         method: 'POST',
