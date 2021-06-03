@@ -1,3 +1,4 @@
 {
-  "baseUrl":"https://apichallenges.herokuapp.com"
+  "baseUrl":"https://apichallenges.herokuapp.com",
+  "supportFile": "cypress/support/commands/index.js"
 }

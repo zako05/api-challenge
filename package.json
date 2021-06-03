@@ -5,6 +5,8 @@
   },
   "dependencies": {
     "cypress": "^7.4.0",
+    "faker": "^5.5.3",
+    "fs": "^0.0.1-security",
     "prettier": "^2.3.0"
   }
 }
