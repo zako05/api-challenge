@@ -1,16 +1,16 @@
 describe('/todo', () => {
+  const challenger = Cypress.env('challenger')
   const todoNotExist = 1000
   const foo = 'bob'
   let todoZero
 
   before(() => {
-    //   cy.request('POST', '/challenger').as('challenger')
     // get first item from returned collection
     cy.request({
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       todoZero = response.body.todos[0].id
@@ -19,7 +19,7 @@ describe('/todo', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/gui/challenges/08ad2f98-9b2a-4cc0-b7cc-be97135c35af')
+    cy.visit(`/gui/challenges/${challenger}`)
   })
 
   it('GET /todos (200)', () => {
@@ -27,7 +27,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -39,7 +39,7 @@ describe('/todo', () => {
       method: 'GET',
       url: `/todos/${todoZero}`,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -52,7 +52,7 @@ describe('/todo', () => {
       url: `/todos/${todoNotExist}`,
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(404)
@@ -67,7 +67,7 @@ describe('/todo', () => {
       method: 'HEAD',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -80,7 +80,7 @@ describe('/todo', () => {
       method: 'POST',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
       body: {
         title: 'new todo',
@@ -97,7 +97,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos?doneStatus=true',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -110,7 +110,7 @@ describe('/todo', () => {
       url: '/todos',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
       body: {
         title: 'new todo',
@@ -128,7 +128,7 @@ describe('/todo', () => {
       url: `/todos/${todoZero}`,
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
       body: {
         title: 'todo updated',
@@ -145,7 +145,7 @@ describe('/todo', () => {
       url: `/todos/${todoZero + 1}`,
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -157,7 +157,7 @@ describe('/todo', () => {
       method: 'OPTIONS',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -171,7 +171,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
         Accept: 'Application/xml',
       },
     }).then((response) => {
@@ -185,7 +185,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
         Accept: 'Application/json',
       },
     }).then((response) => {
@@ -199,7 +199,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
         Accept: 'application/xml, application/json',
       },
     }).then((response) => {
@@ -213,7 +213,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(200)
@@ -227,7 +227,7 @@ describe('/todo', () => {
       url: '/todos',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
         Accept: 'application/gzip',
       },
     }).then((response) => {
@@ -242,7 +242,7 @@ describe('/todo', () => {
         method: 'POST',
         url: '/todos',
         headers: {
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Accept: 'application/xml',
           'Content-type': 'application/xml',
         },
@@ -259,7 +259,7 @@ describe('/todo', () => {
         method: 'POST',
         url: '/todos',
         headers: {
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Accept: 'application/json',
           'Content-type': 'application/json',
         },
@@ -277,7 +277,7 @@ describe('/todo', () => {
         url: '/todos',
         failOnStatusCode: false,
         headers: {
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Accept: 'application/json',
           'Content-type': `application/${foo}`,
         },
@@ -294,7 +294,7 @@ describe('/todo', () => {
         method: 'POST',
         url: '/todos',
         headers: {
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Accept: 'application/json',
           'Content-type': `application/xml`,
         },
@@ -312,7 +312,7 @@ describe('/todo', () => {
         method: 'POST',
         url: '/todos',
         headers: {
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Accept: 'application/xml',
           'Content-type': 'application/json',
         },

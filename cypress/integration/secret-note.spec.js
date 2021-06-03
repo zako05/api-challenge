@@ -1,6 +1,7 @@
 import { createNote } from '../support/faker-generator'
 
 describe('/secret/note', () => {
+  const challenger = Cypress.env('challenger')
   let note
 
   before(() => {
@@ -8,7 +9,7 @@ describe('/secret/note', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/gui/challenges/08ad2f98-9b2a-4cc0-b7cc-be97135c35af')
+    cy.visit(`/gui/challenges/${challenger}`)
     // get auth token
     cy.login('admin', 'password').as('authToken')
   })
@@ -19,7 +20,7 @@ describe('/secret/note', () => {
         method: 'GET',
         url: '/secret/note',
         headers: {
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           'X-AUTH-TOKEN': authToken,
         },
       }).then((response) => {
@@ -34,7 +35,7 @@ describe('/secret/note', () => {
       url: '/secret/note',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(401)
@@ -47,7 +48,7 @@ describe('/secret/note', () => {
       url: '/secret/note',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
         'X-AUTH-TOKEN': 'fakeAuthToken',
       },
     }).then((response) => {
@@ -62,7 +63,7 @@ describe('/secret/note', () => {
         url: '/secret/note',
         headers: {
           'Content-Type': 'application/json',
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           'X-AUTH-TOKEN': authToken,
         },
         body: {
@@ -82,7 +83,7 @@ describe('/secret/note', () => {
           url: '/secret/note',
           headers: {
             'Content-Type': 'application/json',
-            'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+            'X-CHALLENGER': challenger,
             'X-AUTH-TOKEN': authToken,
           },
           body: json,
@@ -101,7 +102,7 @@ describe('/secret/note', () => {
         failOnStatusCode: false,
         headers: {
           'Content-Type': 'application/json',
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
         },
         body: {
           note: note.text,
@@ -120,7 +121,7 @@ describe('/secret/note', () => {
         failOnStatusCode: false,
         headers: {
           'Content-Type': 'application/json',
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           'X-AUTH-TOKEN': 'invalid token',
         },
         body: {
@@ -139,7 +140,7 @@ describe('/secret/note', () => {
         url: '/secret/note',
         headers: {
           'Content-Type': 'application/json',
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Authorization: `Bearer ${authToken}`,
         },
       }).then((response) => {
@@ -155,7 +156,7 @@ describe('/secret/note', () => {
         url: '/secret/note',
         headers: {
           'Content-Type': 'application/json',
-          'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+          'X-CHALLENGER': challenger,
           Authorization: `Bearer ${authToken}`,
         },
         body: {

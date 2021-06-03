@@ -4,11 +4,13 @@ Cypress.Commands.add('login', (username, password) => {
     message: `${username} | ${password}`,
   })
 
+  const challenger = Cypress.env('challenger')
+
   cy.request({
     method: 'POST',
     url: '/secret/token',
     headers: {
-      'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+      'X-CHALLENGER': challenger,
     },
     auth: {
       username: username,

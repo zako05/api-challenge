@@ -1,6 +1,8 @@
 describe('/heartbeat', () => {
+  const challenger = Cypress.env('challenger')
+
   beforeEach(() => {
-    cy.visit('/gui/challenges/08ad2f98-9b2a-4cc0-b7cc-be97135c35af')
+    cy.visit(`/gui/challenges/${challenger}`)
   })
 
   it('GET /heartbeat (204)', () => {
@@ -8,7 +10,7 @@ describe('/heartbeat', () => {
       method: 'GET',
       url: '/heartbeat',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(204)
@@ -21,7 +23,7 @@ describe('/heartbeat', () => {
       url: '/heartbeat',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(405)
@@ -34,7 +36,7 @@ describe('/heartbeat', () => {
       url: '/heartbeat',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(500)
@@ -47,7 +49,7 @@ describe('/heartbeat', () => {
       url: '/heartbeat',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(501)

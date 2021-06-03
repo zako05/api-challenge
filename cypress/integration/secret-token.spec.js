@@ -1,6 +1,8 @@
 describe('/secret/token', () => {
+  const challenger = Cypress.env('challenger')
+
   beforeEach(() => {
-    cy.visit('/gui/challenges/08ad2f98-9b2a-4cc0-b7cc-be97135c35af')
+    cy.visit(`/gui/challenges/${challenger}`)
   })
 
   it('POST /secret/token (201)', () => {
@@ -8,7 +10,7 @@ describe('/secret/token', () => {
       method: 'POST',
       url: '/secret/token',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
       auth: {
         username: 'admin',
@@ -25,7 +27,7 @@ describe('/secret/token', () => {
       url: '/secret/token',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
       auth: {
         username: 'admin',

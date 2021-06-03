@@ -1,4 +1,5 @@
 describe('/todo', () => {
+  const challenger = Cypress.env('challenger')
   let todoZero
 
   before(() => {
@@ -7,7 +8,7 @@ describe('/todo', () => {
       method: 'GET',
       url: '/todos',
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       todoZero = response.body.todos[0].id
@@ -16,7 +17,7 @@ describe('/todo', () => {
   })
 
   beforeEach(() => {
-    cy.visit('/gui/challenges/08ad2f98-9b2a-4cc0-b7cc-be97135c35af')
+    cy.visit(`/gui/challenges/${challenger}`)
   })
 
   it('GET /todo (404)', () => {
@@ -25,7 +26,7 @@ describe('/todo', () => {
       url: '/todo',
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(404)
@@ -41,7 +42,7 @@ describe('/todo', () => {
       url: `/todo/${todoZero}`,
       failOnStatusCode: false,
       headers: {
-        'X-CHALLENGER': '08ad2f98-9b2a-4cc0-b7cc-be97135c35af',
+        'X-CHALLENGER': challenger,
       },
     }).then((response) => {
       expect(response.status).to.eq(404)
