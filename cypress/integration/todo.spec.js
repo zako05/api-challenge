@@ -3,7 +3,6 @@ describe('/todo', () => {
   let todoZero
 
   before(() => {
-    // cy.request('POST', '/challenger').as('challenger')
     cy.request({
       method: 'GET',
       url: '/todos',
@@ -31,9 +30,6 @@ describe('/todo', () => {
     }).then((response) => {
       expect(response.status).to.eq(404)
     })
-    cy.get(
-      'body > div > table:nth-child(12) > tbody > tr:nth-child(2) > td:nth-child(3)'
-    ).should('have.text', 'true')
   })
 
   it('GET /todo/id (404)', () => {
