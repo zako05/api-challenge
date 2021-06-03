@@ -25,7 +25,7 @@ Accept: */*
 
 HTTP/1.1 201 Created
 ...
-X-Challenger: a68ed1c9-4da6-43f1-b86a-1172ec70ff3b
+X-Challenger: <challenger-id>
 ```
 
 ### Set challenger as environment variable
