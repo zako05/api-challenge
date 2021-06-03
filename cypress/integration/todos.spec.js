@@ -104,7 +104,7 @@ describe('/todo', () => {
     })
   })
 
-  it('POST /todos (200) doneStatus', () => {
+  it('POST /todos (400) doneStatus', () => {
     cy.request({
       method: 'POST',
       url: '/todos',
@@ -126,7 +126,6 @@ describe('/todo', () => {
     cy.request({
       method: 'POST',
       url: `/todos/${todoZero}`,
-      failOnStatusCode: false,
       headers: {
         'X-CHALLENGER': challenger,
       },
@@ -142,8 +141,8 @@ describe('/todo', () => {
   it('DELETE /todos/{id} (200)', () => {
     cy.request({
       method: 'DELETE',
+      // it will fail if run it multiple times 
       url: `/todos/${todoZero + 1}`,
-      failOnStatusCode: false,
       headers: {
         'X-CHALLENGER': challenger,
       },
