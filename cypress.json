@@ -1,7 +1,7 @@
 {
-  "baseUrl":"https://apichallenges.herokuapp.com",
+  "baseUrl": "https://apichallenges.herokuapp.com",
   "supportFile": "cypress/support/commands/index.js",
   "env": {
-    "challenger": "08ad2f98-9b2a-4cc0-b7cc-be97135c35af"
+    "challenger": "<challenger-id>"
   }
 }
